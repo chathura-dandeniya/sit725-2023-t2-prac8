@@ -1,0 +1,25 @@
+{
+  "name": "sit725-2023-t2-prac2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chathura-dandeniya/sit725-2023-t2-prac2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chathura-dandeniya/sit725-2023-t2-prac2/issues"
+  },
+  "homepage": "https://github.com/chathura-dandeniya/sit725-2023-t2-prac2#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  }
+}
