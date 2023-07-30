@@ -41,11 +41,69 @@ const formSumitted = () => {
     console.log(formData);
 }
 
+// $(document).ready(function () {
+//     $('.materialboxed').materialbox();
+//     $('#formSubmit').click(() => {
+//         formSumitted();
+//     });
+//     addCards(cardList);
+//     $('.modal').modal();
+// });
+
+// //..........Added........................
+// $(document).ready(function () {
+//     $('#formSubmit').click(function (e) {
+//         e.preventDefault();
+
+//         let formData = {
+//             firstName: $('#first_name').val(),
+//             lastName: $('#last_name').val(),
+//             password: $('#password').val(),
+//             email: $('#email').val()
+//         };
+
+//         $.ajax({
+//             type: 'POST',
+//             url: '/submit-form',
+//             data: formData,
+//             success: function () {
+//                 console.log('Data sent successfully');
+//             },
+//             error: function () {
+//                 console.log('There was an error sending the data');
+//             }
+//         });
+//     });
+// });
+
 $(document).ready(function () {
     $('.materialboxed').materialbox();
-    $('#formSubmit').click(() => {
-        formSumitted();
-    });
     addCards(cardList);
     $('.modal').modal();
+
+    $('#formSubmit').click(function (e) {
+        e.preventDefault();
+
+        // This function was defined in the first block
+        formSumitted();
+
+        let formData = {
+            firstName: $('#first_name').val(),
+            lastName: $('#last_name').val(),
+            password: $('#password').val(),
+            email: $('#email').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/submit-form',
+            data: formData,
+            success: function () {
+                console.log('Data sent successfully');
+            },
+            error: function () {
+                console.log('There was an error sending the data');
+            }
+        });
+    });
 });
