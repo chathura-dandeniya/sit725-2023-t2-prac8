@@ -4,7 +4,7 @@ let express = require('express');
 // // Initialize an express application
 let app = express();
 
-app.set('view engine', 'ejs');
+//pp.set('view engine', 'ejs');
 
 // Set the server port. First, it tries to use the PORT environment variable value, 
 // but if it doesn't exist (undefined), it uses 3000 as a default port
@@ -21,6 +21,8 @@ app.get('/', (req, res) => {
 
 // Handle GET requests to '/add', expecting 'num1' and 'num2' 
 // as query parameters. The route adds these two numbers together and responds with the sum
+
+/*
 app.get('/add', (req, res) => {
     const number1 = Number(req.query.num1);
     const number2 = Number(req.query.num2);
@@ -36,7 +38,9 @@ app.get('/add', (req, res) => {
         res.status(400).json({ error: 'Invalid numbers provided' });
     }
 });
+*/
 
+/*
 app.get('/subtract', (req, res) => {
     const number1 = Number(req.query.num1);
     const number2 = Number(req.query.num2);
@@ -48,6 +52,7 @@ app.get('/subtract', (req, res) => {
         res.status(400).json({ error: 'Invalid numbers provided' });
     }
 });
+*/
 
 app.listen(port, () => {
     console.log('server started');
