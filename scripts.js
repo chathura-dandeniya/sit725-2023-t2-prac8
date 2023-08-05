@@ -1,109 +1,57 @@
-const cardList = [{
-    title: 'cat 1',
-    path: 'images/kitten1.jpg',
-    subTitle: 'About Cat 1',
-    description: 'Description of Cat 1'
-},
-{
-    title: 'cat 2',
-    path: 'images/kitten2.jpg',
-    subTitle: 'About Cat 2',
-    description: 'Description of Cat 2'
-},
-{
-    title: 'cat 3',
-    path: 'images/kitten3.jpg',
-    subTitle: 'About Cat 3',
-    description: 'Description of Cat 3'
-}];
-
 const addCards = (items) => {
     items.forEach(item => {
         let itemToAppend = '<div class="col s4 center-align">' +
             '<div class="card medium"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="' + item.path + '">' +
             '</div><div class="card-content">' +
-            '<span class="card-title activator grey-text text-darken-4">' + item.title + '<i class="material-icons right">more_vert</i></span><p><a href="#">' + item.subTitle + '</a></p></div>' +
+            '<span class="card-title activator grey-text text-darken-4">' + item.title + '<i class="material-icons right">more_vert</i></span><p><a href="#"></a></p></div>' +
             '<div class="card-reveal">' +
-            '<span class="card-title grey-text text-darken-4">' + item.title + '<i class="material-icons right">close</i></span>' +
+            '<span class="card-title grey-text text-darken-4">' + item.subTitle + '<i class="material-icons right">close</i></span>' +
             '<p class="card-text">' + item.description + '</p>' +
             '</div></div></div>';
         $("#card-section").append(itemToAppend)
     });
 }
 
-const formSumitted = () => {
+const formSubmitted = () => {
     let formData = {};
-    formData.firstName = $('#first_name').val();
-    formData.lastName = $('#last_name').val();
-    formData.password = $('#password').val();
-    formData.email = $('#email').val();
+    formData.title = $('#title').val();
+    formData.subTitle = $('#subTitle').val();
+    formData.path = $('#path').val();
+    formData.description = $('#description').val();
 
     console.log(formData);
+    postCat(formData);
 }
 
-// $(document).ready(function () {
-//     $('.materialboxed').materialbox();
-//     $('#formSubmit').click(() => {
-//         formSumitted();
-//     });
-//     addCards(cardList);
-//     $('.modal').modal();
-// });
+function postCat(cat) {
+    $.ajax({
+        url: '/api/cat',
+        type: 'POST',
+        data: cat,
+        success: (result) => {
+            if (result.statusCode === 201) {
+                alert('cat posted');
+            }
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            alert('An error occurred: ' + textStatus);
+        }
+    });
+}
 
-// //..........Added........................
-// $(document).ready(function () {
-//     $('#formSubmit').click(function (e) {
-//         e.preventDefault();
-
-//         let formData = {
-//             firstName: $('#first_name').val(),
-//             lastName: $('#last_name').val(),
-//             password: $('#password').val(),
-//             email: $('#email').val()
-//         };
-
-//         $.ajax({
-//             type: 'POST',
-//             url: '/submit-form',
-//             data: formData,
-//             success: function () {
-//                 console.log('Data sent successfully');
-//             },
-//             error: function () {
-//                 console.log('There was an error sending the data');
-//             }
-//         });
-//     });
-// });
+function getAllCats() {
+    $.get('/api/cats', (response) => {
+        if (response.statusCode === 200) {
+            addCards(response.data);
+        }
+    });
+}
 
 $(document).ready(function () {
     $('.materialboxed').materialbox();
-    addCards(cardList);
-    $('.modal').modal();
-
-    $('#formSubmit').click(function (e) {
-        e.preventDefault();
-
-        // This function was defined in the first block
-        formSumitted();
-
-        let formData = {
-            firstName: $('#first_name').val(),
-            lastName: $('#last_name').val(),
-            password: $('#password').val(),
-            email: $('#email').val()
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: '/submit-form',
-            data: formData,
-            success: function () {
-                console.log('Data sent successfully');
-            },
-            error: function () {
-                console.log('There was an error sending the data');
-            }
-        });
+    $('#formSubmit').click(() => {
+        formSubmitted();
     });
+    $('.modal').modal();
+    getAllCats();
 });
