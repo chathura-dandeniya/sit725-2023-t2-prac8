@@ -2,7 +2,7 @@ let express = require('express');
 let app = express();
 let router = require('./routers/router');
 let db = require('./dbConnection');
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 8080;
 
 let http = require('http').createServer(app);
 let io = require('socket.io')(http);
